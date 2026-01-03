@@ -1,0 +1,54 @@
+{
+    "dns_facts": [
+        {
+            "id": 1,
+            "title": "The entire DNS root zone is tiny",
+            "description": "The entire root zone of the internet is stored in a small text file managed by IANA. It maps top-level domains like .com, .org, and .ca to their authoritative operators. The file is only about 2 MB in size, meaning the top of the internet's naming hierarchy could fit on a floppy disk."
+        },
+        {
+            "id": 2,
+            "title": "There are only 13 root server addresses",
+            "description": "DNS root servers are labeled A through M. These 13 logical addresses actually represent more than 1000 physical servers deployed worldwide using Anycast routing. When you query a root server, your request is automatically routed to the closest physical instance."
+        },
+        {
+            "id": 3,
+            "title": "DNS is usually unencrypted",
+            "description": "Traditional DNS uses UDP port 53 and sends queries in plain text. This means anyone on the network can see which domains you look up. Modern encrypted DNS solutions include DNS over HTTPS (DoH), DNS over TLS (DoT), and DNS over QUIC (DoQ)."
+        },
+        {
+            "id": 4,
+            "title": "DNS can be used as a covert data channel",
+            "description": "Malware often abuses DNS queries to exfiltrate data because DNS traffic is rarely blocked by firewalls. This technique is known as DNS tunneling. A compromised system may send encoded data inside subdomains like password123.attacker.com. Tools such as iodine, dnscat, and Cobalt Strike commonly use this technique."
+        },
+        {
+            "id": 5,
+            "title": "DNS was designed for a tiny internet",
+            "description": "DNS was invented in 1983 by Paul Mockapetris when the internet had roughly 1000 hosts. Over time the protocol has been extended with technologies such as DNSSEC, EDNS, Anycast routing, and large UDP packet extensions to support the scale of today's internet."
+        },
+        {
+            "id": 6,
+            "title": "DNS responses can change depending on who you are",
+            "description": "Large services return different IP addresses depending on the user's geographic location, ISP, and network latency. This behavior is used for load balancing, content delivery optimization, and traffic routing. Two users querying the same domain may receive different IP addresses."
+        },
+        {
+            "id": 7,
+            "title": "A DNS attack once disrupted major internet services",
+            "description": "In 2016 a massive DDoS attack targeted Dyn's DNS infrastructure using the Mirai botnet. Millions of compromised IoT devices generated enormous DNS traffic which caused outages for major services including Twitter, Reddit, Netflix, GitHub, and Spotify."
+        },
+        {
+            "id": 8,
+            "title": "DNS supports extremely deep domain names",
+            "description": "The DNS protocol technically allows up to 127 labels in a domain name. A domain could theoretically look like a.b.c.d.e.f.g.h.example.com, although most resolvers and applications break long before reaching this theoretical limit."
+        },
+        {
+            "id": 9,
+            "title": "Domain names have strict length limits",
+            "description": "DNS labels can be a maximum of 63 characters long, and the full domain name can be up to 253 characters in total length. For example: this.is.a.very.long.domain.name.example.com."
+        },
+        {
+            "id": 10,
+            "title": "Your computer caches DNS aggressively",
+            "description": "Most DNS lookups never leave your machine because they are served from multiple cache layers. These include the browser cache, the operating system DNS cache, the local resolver cache, and the hosts file. Flushing DNS caches often fixes connectivity issues caused by stale records."
+        }
+    ]
+}

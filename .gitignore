@@ -1,0 +1,41 @@
+# Python bytecode and caches
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environments
+.venv/
+venv/
+env/
+ENV/
+dns_analyzer/.venv/
+
+# Local environment files
+.env
+.env.*
+
+# Test and tooling caches
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+.coverage.*
+htmlcov/
+
+# Runtime logs and local server output
+*.log
+uvicorn.out.log
+uvicorn.err.log
+*.bak
+
+# Local DNS/runtime artifacts
+.dns_history.json
+*.sqlite3
+
+# OS/editor noise
+.DS_Store
+Thumbs.db
+
+# Local-only docs
+prompt.md
+features.md
