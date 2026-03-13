@@ -239,16 +239,25 @@ def print_human_report(results: Dict[str, Any], domain: str, full: bool = False)
     if "resolve_path" in results:
         r = results["resolve_path"]
         console.print("[bold green]DNS Resolution Path:[/bold green]")
-        console.print(f"Root lookup: {r['root_latency_ms']} ms")
-        console.print(f"TLD lookup (.{r['tld_name']}): {r['tld_latency_ms']} ms")
-        console.print(f"Authoritative lookup: {r['auth_latency_ms']} ms")
-        console.print("\n[cyan]Final Answer[/cyan]")
-        for ans in r['final_answer']:
-            console.print(f"{domain} -> {ans}")
-        console.print(f"\nTotal resolution time: {r['total_resolution_time_ms']} ms")
-        for warn in r.get("warnings", []):
-            console.print(f"[bold red]Warning:[/bold red] {warn}")
-        console.print()
+        samples = r if isinstance(r, list) else [r]
+        for sample in samples:
+            provider_name = sample.get("provider_name", "Resolution Sample")
+            console.print(f"[cyan]{provider_name}[/cyan]")
+            console.print(f"Root lookup: {sample.get('root_latency_ms', 'n/a')} ms")
+            console.print(f"TLD lookup (.{sample.get('tld_name', '?')}): {sample.get('tld_latency_ms', 'n/a')} ms")
+            console.print(f"Authoritative lookup: {sample.get('auth_latency_ms', 'n/a')} ms")
+            console.print(f"Final lookup: {sample.get('final_latency_ms', 'n/a')} ms")
+            console.print("[cyan]Final Answer[/cyan]")
+            final_answers = sample.get("final_answer", [])
+            if final_answers:
+                for ans in final_answers:
+                    console.print(f"{domain} -> {ans}")
+            else:
+                console.print("No final answer returned")
+            console.print(f"Total resolution time: {sample.get('total_resolution_time_ms', 'n/a')} ms")
+            for warn in sample.get("warnings", []):
+                console.print(f"[bold red]Warning:[/bold red] {warn}")
+            console.print()
         
     if "deep_dnssec" in results:
         d = results["deep_dnssec"]

@@ -31,6 +31,7 @@ uvicorn.err.log
 # Local DNS/runtime artifacts
 .dns_history.json
 *.sqlite3
+*_dns_graph
 
 # OS/editor noise
 .DS_Store
