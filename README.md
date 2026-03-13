@@ -109,6 +109,5 @@ Important:
 ## Documentation
 
 - [deployment.md](deployment.md): Linux server deployment and hardening
-- [features.md](features.md): Current feature and behavior reference
-- [prompt.md](prompt.md): Original project brief and scope
+- 
 - Source code: [https://github.com/rajangohil99/probablyDNS](https://github.com/rajangohil99/probablyDNS)
