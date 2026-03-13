@@ -1,27 +1,52 @@
 # probablyDNS
 
-`probablyDNS` is a DNS diagnostic tool with a Python CLI and a FastAPI web UI. It is built for debugging real DNS failures: broken delegation, resolver drift, DNSSEC problems, propagation issues, HTTP reachability mismatches, and infrastructure surprises.
+<p align="center">
+  <strong>Please don't be DNS... it was DNS.</strong>
+</p>
 
-## What It Does
+<p align="center">
+  A brutally honest DNS diagnostic tool for tracing delegation failures, resolver drift, DNSSEC issues, propagation lag, and infrastructure surprises.
+</p>
 
-- Traces delegation from root to authoritative nameservers
-- Compares results across public resolvers
-- Collects common DNS records and timing data
-- Checks DNSSEC status and deeper validation signals
-- Runs reachability and HTTP checks for resolved targets
-- Produces a web dashboard and JSON output from the same backend logic
+<p align="center">
+  <a href="https://github.com/rajangohil99/probablyDNS"><img src="https://img.shields.io/badge/source-GitHub-111111?style=for-the-badge&logo=github" alt="GitHub"></a>
+  <img src="https://img.shields.io/badge/python-3.11%2B-3776AB?style=for-the-badge&logo=python&logoColor=white" alt="Python 3.11+">
+  <img src="https://img.shields.io/badge/FastAPI-web%20UI-009688?style=for-the-badge&logo=fastapi&logoColor=white" alt="FastAPI">
+  <img src="https://img.shields.io/badge/Typer-CLI-5E43FF?style=for-the-badge" alt="Typer CLI">
+  <img src="https://img.shields.io/badge/dnspython-core%20DNS%20engine-2F6FEB?style=for-the-badge" alt="dnspython">
+  <img src="https://img.shields.io/badge/rate%20limit-10%20checks%2Fmin-16A34A?style=for-the-badge" alt="Rate Limit">
+</p>
 
-## Requirements
+---
 
-- Python 3.11+
-- Public outbound access for:
-  - UDP/53
-  - TCP/80
-  - TCP/443
+## Why probablyDNS
 
-## Install
+`probablyDNS` helps answer the question teams usually ask too late: is the problem actually DNS?
 
-From the repo root:
+It combines a Python CLI and a FastAPI web app over the same backend so you can inspect a domain from multiple angles without switching tools. The project is aimed at real-world incidents, not just happy-path record lookups.
+
+## What It Checks
+
+- Delegation chain from root to authoritative nameservers
+- Resolver comparison across public DNS providers
+- DNS record collection and timing signals
+- DNSSEC validation and related health indicators
+- HTTP and reachability checks for resolved targets
+- Optional extras such as WHOIS, reverse DNS, split DNS, wildcard detection, graphs, and maps
+
+## Stack
+
+| Layer | Used Here |
+| --- | --- |
+| Language | Python 3.11+ |
+| Web UI | FastAPI + Uvicorn |
+| CLI | Typer + Rich |
+| DNS Engine | dnspython |
+| Extras | python-whois, graphviz |
+
+## Quick Start
+
+### Install
 
 ```bash
 python -m venv .venv
@@ -38,7 +63,7 @@ python -m venv .venv
 .\.venv\Scripts\python -m pip install -r requirements.txt
 ```
 
-## Run The Web App
+### Run The Web App
 
 Linux/macOS:
 
@@ -53,17 +78,15 @@ Windows:
 .\run_webapp.ps1
 ```
 
-Then open `http://127.0.0.1:8000`.
+Open [http://127.0.0.1:8000](http://127.0.0.1:8000).
 
-## Run The CLI
-
-Examples:
+### Run The CLI
 
 ```bash
 python -m dns_analyzer.cli example.com
 python -m dns_analyzer.cli example.com --full-report
-python -m dns_analyzer.cli example.com --subdomains --whois
 python -m dns_analyzer.cli example.com --full-report --json
+python -m dns_analyzer.cli example.com --subdomains --whois
 python -m dns_analyzer.cli example.com --map
 ```
 
@@ -82,9 +105,17 @@ Useful flags:
 - `--graph`
 - `--map`
 
-## Rate Limiting
+## Network Requirements
 
-The FastAPI app includes a built-in in-memory rate limiter for expensive scan endpoints:
+The scanner expects outbound access to:
+
+- `UDP/53`
+- `TCP/80`
+- `TCP/443`
+
+## Built-In Rate Limiting
+
+The FastAPI app includes an in-memory limiter for the expensive scan endpoints.
 
 - Limit: `10` requests per `60` seconds per client IP
 - Paths:
@@ -100,14 +131,31 @@ export PROBABLYDNS_RATE_LIMIT_REQUESTS=10
 export PROBABLYDNS_RATE_LIMIT_WINDOW_SECONDS=60
 ```
 
-Important:
+Notes:
 
-- This limiter is process-local
-- If you run multiple workers, each worker keeps its own counter
-- For public deployment, also add reverse-proxy rate limiting
+- The limiter is process-local
+- Multiple workers mean multiple independent counters
+- For public deployment, add reverse-proxy rate limiting too
 
-## Documentation
+## Deploying Publicly
 
-- [deployment.md](deployment.md): Linux server deployment and hardening
-- 
-- Source code: [https://github.com/rajangohil99/probablyDNS](https://github.com/rajangohil99/probablyDNS)
+The included deployment guide covers:
+
+- Linux server setup
+- `systemd` service management
+- `nginx` reverse proxy configuration
+- TLS with Certbot
+- proxy-level rate limiting
+
+See [deployment.md](deployment.md).
+
+## Project Files
+
+- [deployment.md](deployment.md): Linux deployment and hardening notes
+- [run_webapp.ps1](run_webapp.ps1): Windows launcher
+- [run_webapp.cmd](run_webapp.cmd): Alternate Windows launcher
+- [requirements.txt](requirements.txt): Python dependencies
+
+## Source
+
+[rajangohil99/probablyDNS](https://github.com/rajangohil99/probablyDNS)
