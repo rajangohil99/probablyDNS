@@ -83,11 +83,11 @@ Open [http://127.0.0.1:8000](http://127.0.0.1:8000).
 ### Run The CLI
 
 ```bash
-python -m dns_analyzer.cli example.com
-python -m dns_analyzer.cli example.com --full-report
-python -m dns_analyzer.cli example.com --full-report --json
-python -m dns_analyzer.cli example.com --subdomains --whois
-python -m dns_analyzer.cli example.com --map
+python -m dns_analyzer.cli analyze example.com
+python -m dns_analyzer.cli analyze example.com --full-report
+python -m dns_analyzer.cli analyze example.com --full-report --json
+python -m dns_analyzer.cli analyze example.com --subdomains --whois
+python -m dns_analyzer.cli analyze example.com --map
 ```
 
 Useful flags:
