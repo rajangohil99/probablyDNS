@@ -37,7 +37,7 @@ It combines a Python CLI and a FastAPI web app over the same backend so you can 
 
 ### Results Dashboard
 
-![probablyDNS results dashboard](assets/probablyDNS_exampleReport.png)
+![probablyDNS results dashboard](assets/probablyDNS_report.gif)
 
 ## What It Checks
 
