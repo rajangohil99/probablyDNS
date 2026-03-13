@@ -25,6 +25,20 @@
 
 It combines a Python CLI and a FastAPI web app over the same backend so you can inspect a domain from multiple angles without switching tools. The project is aimed at real-world incidents, not just happy-path record lookups.
 
+## Screenshots
+
+### Homepage
+
+![probablyDNS homepage](assets/probablyDNS_homepage.png)
+
+### Scan Progress
+
+![probablyDNS scanning view](assets/probablyDNS_scanning.png)
+
+### Results Dashboard
+
+![probablyDNS results dashboard](assets/probablyDNS_exampleReport.png)
+
 ## What It Checks
 
 - Delegation chain from root to authoritative nameservers
